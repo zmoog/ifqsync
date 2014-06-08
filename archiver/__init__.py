@@ -15,10 +15,10 @@ def get_client(options):
 
 	#print "tyye", dir(options)
 
-	sess = session.DropboxSession(APP_KEY, APP_SECRET, ACCESS_TYPE)
+	current_session = session.DropboxSession(APP_KEY, APP_SECRET, ACCESS_TYPE)
 
-	# We will use the OAuth token we generated already. The set_token API 
+	# We will use the OAuth token we generated already. The set_token API
 	# accepts the oauth_token and oauth_token_secret as inputs.
-	sess.set_token(options.access_token_key, options.access_token_secret)
+	current_session.set_token(options.access_token_key, options.access_token_secret)
 
-	return client.DropboxClient(sess)
+	return client.DropboxClient(current_session)
