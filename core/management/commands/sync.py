@@ -13,7 +13,7 @@ class Command(BaseCommand):
 	def handle(self, args, options):
 
 		target_day = datetime.date.today()
-		#target_day = datetime.date(2014,4,26)
+		# target_day = datetime.date(2014,6,6)
 
 		target_filename = target_day.strftime(TARGET_FILENAME_PATTERN)
 

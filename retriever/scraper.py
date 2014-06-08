@@ -23,7 +23,7 @@ def scrape(target_day):
     browser.form['pwd'] = os.environ['IFQSYNC_IFQ_PASSWORD']
     browser.submit()
 
-    filename = target_day.strftime(os.path.join(os.environ['IFQSYNC_ARCHIVE_PATH'], 'ilfatto-%Y%m%d.pdf'))
+    filename = target_day.strftime(os.path.join(os.environ['IFQSYNC_TMP_PATH'], 'ilfatto-%Y%m%d.pdf'))
     url = target_day.strftime('http://pdf.ilfattoquotidiano.it/openpdf/?n=%Y%m%d')
 
     browser.open(url)
@@ -41,8 +41,8 @@ def scrape(target_day):
 
     pdf_file = open(filename, 'w')
     pdf_file.write(response.read())
-    pdf_file.close()
     pdf_file.flush()
+    pdf_file.close()
 
     return filename
 
