@@ -5,35 +5,39 @@ from core.management.base import BaseCommand
 from archiver import get_client
 from retriever import scraper
 
+ROOT_FOLDER = '/Il Fatto Quotidiano'
+TARGET_FILENAME_PATTERN = 'ilfatto-%Y%m%d.pdf'
+
 class Command(BaseCommand):
-	
+
 	def handle(self, args, options):
-		
-		the_day = datetime.date.today()
-		#the_day = datetime.date(2014,4,26)
 
-		filename = the_day.strftime('ilfatto-%Y%m%d.pdf')
+		target_day = datetime.date.today()
+		#target_day = datetime.date(2014,4,26)
 
-		print "handling: %s" % (filename)
+		target_filename = target_day.strftime(TARGET_FILENAME_PATTERN)
+
+		print "Looking for %s in the Dropbox archive .. " % (target_filename)
 
 		client = get_client(options)
 
 
-		result = client.search('/Il Fatto Quotidiano', filename)
+		result = client.search(ROOT_FOLDER, target_filename)
 
 		if not result:
-			
-			print "%s does not exists (yet)" % (filename)
 
-			#scraper = get_scraper(options)
+			print "File %s does not exists (yet)" % (target_filename)
 
-			pdf = scraper.scrape(the_day)
+
+			local_filename = scraper.scrape(target_day)
 		
-			if pdf:
-				client.put_file('/Il Fatto Quotidiano/%s' % filename, open(pdf))
+			if local_filename:
+				response = client.put_file('%s/%s' % (ROOT_FOLDER, target_filename), open(local_filename))
+				print "Original: ", os.stat(local_filename)
+				print "Uploaded: ", response
 			else:
 				print "This issue is not yet availabe."
 
 
 		else:
-			print 'already present: %s' % (result)
+			print 'File %s is already present: %s' % (result)
