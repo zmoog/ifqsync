@@ -36,6 +36,6 @@ print "linked account:", client.account_info()
 
 
 # Let's upload a file!
-f = open(os.path.join(os.environ['IFQSYNC_ARCHIVE_PATH'], 'ilfatto-20130318.pdf'))
+f = open(os.path.join(os.environ['IFQSYNC_TMP_PATH'], 'ilfatto-20130318.pdf'))
 response = client.put_file('/Il Fatto Quotidiano/ilfatto-20130318.pdf', f)
 print "uploaded:", response

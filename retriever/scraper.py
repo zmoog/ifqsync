@@ -28,16 +28,26 @@ def scrape(the_day):
     b.form['pwd'] = os.environ['IFQSYNC_IFQ_PASSWORD']
     b.submit()
     
-    filename = the_day.strftime(os.path.join(os.environ['IFQSYNC_ARCHIVE_PATH'], 'ilfatto-%Y%m%d.pdf'))
+    file_path = the_day.strftime(os.path.join(os.environ['IFQSYNC_TMP_PATH'], 'ilfatto.pdf'))
     url = the_day.strftime('http://pdf.ilfattoquotidiano.it/openpdf/?n=%Y%m%d')
     
-    f = open(filename, 'w')
-    
+    print "opening url %s" % (url)
+
     b.open(url)
-    
-    f.write(b.response().read())
+
+    response = b.response()    
+    headers = response.info()
+
+    print headers
+    content_type = headers['Content-Type']
+    if "application/pdf" != content_type:
+        print "Response type 'application/pdf' was expected, but '%s' was found." % (content_type)
+	return
+
+    f = open(file_path, 'w')
+    f.write(response.read())
     f.close()
 
-    print "written to %s" % (filename)
+    print "written to %s" % (file_path)
 
-    return filename
+    return file_path

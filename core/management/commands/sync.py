@@ -10,6 +10,7 @@ class Command(BaseCommand):
 	def handle(self, args, options):
 		
 		the_day = datetime.date.today()
+		#the_day = datetime.date(2014,4,26)
 
 		filename = the_day.strftime('ilfatto-%Y%m%d.pdf')
 
@@ -27,8 +28,11 @@ class Command(BaseCommand):
 			#scraper = get_scraper(options)
 
 			pdf = scraper.scrape(the_day)
-
-			client.put_file('/Il Fatto Quotidiano/%s' % filename, open(pdf))
+		
+			if pdf:
+				client.put_file('/Il Fatto Quotidiano/%s' % filename, open(pdf))
+			else:
+				print "This issue is not yet availabe."
 
 
 		else:
