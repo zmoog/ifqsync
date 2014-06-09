@@ -4,6 +4,8 @@ import datetime
 import mechanize
 import cookielib
 
+import settings
+
 browser = mechanize.Browser()
 
 # disable the handling of the robots.txt file (sorry)
@@ -19,18 +21,18 @@ def scrape(target_day):
     print 'title: ', browser.title()
 
     browser.select_form(name='loginform')
-    browser.form['log'] = os.environ['IFQSYNC_IFQ_USERNAME']
-    browser.form['pwd'] = os.environ['IFQSYNC_IFQ_PASSWORD']
+    browser.form['log'] = settings.IFQ_USERNAME
+    browser.form['pwd'] = settings.IFQ_PASSWORD
     browser.submit()
 
-    filename = target_day.strftime(os.path.join(os.environ['IFQSYNC_TMP_PATH'], 'ilfatto-%Y%m%d.pdf'))
+    filename = target_day.strftime(os.path.join(settings.TMP_PATH, 'ilfatto-%Y%m%d.pdf'))
     url = target_day.strftime('http://pdf.ilfattoquotidiano.it/openpdf/?n=%Y%m%d')
 
     browser.open(url)
 
     response = browser.response()
     headers = response.info()
- 
+
     print headers
 
     content_type = headers['Content-Type']
@@ -45,4 +47,3 @@ def scrape(target_day):
     pdf_file.close()
 
     return filename
-

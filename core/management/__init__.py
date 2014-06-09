@@ -1,10 +1,13 @@
 import collections
 import os
 import sys
-from optparse import OptionParser, NO_DEFAULT
+
+from optparse import OptionParser, NO_DEFAULT #, Option, OptionValueError
 
 from core.utils.importlib import import_module
 from base import BaseCommand
+
+
 
 
 class LaxOptionParser(OptionParser):
@@ -127,9 +130,10 @@ class ManagementUtility(object):
 		#self.autocomplete()
 		try:
 			options, args = parser.parse_args(self.argv)
-			print options, args
-			handle_default_options(options)
+			#print options, args
+			#handle_default_options(options)
 		except:
+			print('OPTION ERROR!')
 			pass # Ignore any option errors at this point.
 
 		try:
@@ -142,12 +146,10 @@ class ManagementUtility(object):
 			subcommand = 'help' # Display help if no arguments were given.
 
 
-        
+
 def execute_from_command_line(argv=None):
 	"""
 	A simple method that runs a ManagementUtility.
 	"""
 	utility = ManagementUtility(argv)
 	utility.execute()
-
-
