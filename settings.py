@@ -2,8 +2,8 @@ import os
 
 # Get your app key and secret from the Dropbox developer website
 
-API_KEY = os.environ['IFQSYNC_DROPBOX_API_KEY']
-API_SECRET = os.environ['IFQSYNC_DROPBOX_API_SECRET']
+APP_KEY = os.environ['IFQSYNC_DROPBOX_APP_KEY']
+APP_SECRET = os.environ['IFQSYNC_DROPBOX_APP_SECRET']
 ACCESS_TOKEN_KEY = os.environ['IFQSYNC_DROPBOX_ACCESS_TOKEN_KEY']
 ACCESS_TOKEN_SECRET = os.environ['IFQSYNC_DROPBOX_ACCESS_TOKEN_SECRET']
 

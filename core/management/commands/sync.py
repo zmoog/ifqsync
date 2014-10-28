@@ -16,7 +16,7 @@ class Command(BaseCommand):
 		#else:
 		#	target_date = datetime.date.today()
 
-		target_filename = target_date.strftime(settings.TARGET_FILENAME_PATTERN)
+		target_filename = target_date.strftime(TARGET_FILENAME_PATTERN)
 
 		print "Looking for %s in the Dropbox archive .. " % (target_filename)
 
@@ -41,4 +41,4 @@ class Command(BaseCommand):
 
 
 		else:
-			print 'File %s is already present: %s' % (result)
+			print 'File %s is already present: %s' % (target_filename, result)

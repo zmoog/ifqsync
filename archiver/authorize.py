@@ -4,8 +4,8 @@ import os
 from dropbox import client, rest, session
 
 # Get your app key and secret from the Dropbox developer website
-APP_KEY = os.environ['IFQSYNC_DROPBOX_API_KEY'] # '393a8xvgud7k6sv'
-APP_SECRET = os.environ['IFQSYNC_DROPBOX_API_SECRET'] #'is5w49k9gq5mkj7'
+APP_KEY = os.environ['IFQSYNC_DROPBOX_APP_KEY'] 
+APP_SECRET = os.environ['IFQSYNC_DROPBOX_APP_SECRET']
 
 # ACCESS_TYPE should be 'dropbox' or 'app_folder' as configured for your app
 ACCESS_TYPE = 'dropbox'

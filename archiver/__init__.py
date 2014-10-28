@@ -11,7 +11,7 @@ ACCESS_TYPE = 'dropbox'
 
 def get_client(options):
 
-	current_session = session.DropboxSession(settings.API_KEY, settings.API_SECRET, ACCESS_TYPE)
+	current_session = session.DropboxSession(settings.APP_KEY, settings.APP_SECRET, ACCESS_TYPE)
 
 	# We will use the OAuth token we generated already. The set_token API
 	# accepts the oauth_token and oauth_token_secret as inputs.
